@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/DdddOCR.NET.Benchmarks/DdddOCR.NET.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/DdddOCR.NET.CommandLine/DdddOCR.NET.CommandLine.csproj" />
+    <Project Path="src/DdddOCR.NET.Core/DdddOCR.NET.Core.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/DdddOCR.NET.Core.Tests/DdddOCR.NET.Core.Tests.csproj" />
+    <Project Path="test/DdddOCR.NET.TestHelpers/DdddOCR.NET.TestHelpers.csproj" />
+  </Folder>
+</Solution>
