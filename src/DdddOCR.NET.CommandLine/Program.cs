@@ -20,6 +20,7 @@ Console.CancelKeyPress += (s, e) => {
 };
 
 var images = fileSystem.Directory.GetFiles("test-images", "*.jpg", SearchOption.AllDirectories);
+int total = 0, failures = 0;
 foreach(var image in images) {
     var stopwatch = Stopwatch.StartNew();
     var result = await ocr.ReadTextAsync(image, cts.Token);
@@ -28,5 +29,13 @@ foreach(var image in images) {
     var fileName = fileSystem.Path.GetFileName(image);
     var isMatch = fileSystem.Path.GetFileNameWithoutExtension(image).Equals(result, StringComparison.OrdinalIgnoreCase);
 
+    total++;
+    if(!isMatch) {
+        failures++;
+    }
+
     consoleLogger.LogInformation("Image: {Image} - IsMatch: {IsMatch} - Result: {Result} - Time: {ElapsedMilliseconds} ms", image, isMatch, result, stopwatch.ElapsedMilliseconds);
 }
+
+var successRate = (double)(total - failures) / total * 100;
+consoleLogger.LogInformation("Success Rate: {SuccessRate:F2}%", successRate);

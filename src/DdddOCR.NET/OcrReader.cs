@@ -12,22 +12,36 @@ using SixLabors.ImageSharp.Processing;
 
 namespace DdddOCR.NET;
 
-public class OcrReader {
+public sealed class OcrReader : IDisposable {
     private readonly IFileSystem _fileSystem;
     private readonly ILogger<OcrReader> _logger;
+
+    private readonly InferenceSession _session;
+
+    private const string _modelLocation = "OnnxModel/common_old.onnx";
+    private const string _charsetLocation = "OnnxModel/common_old.json";
 
     public OcrReader() {
         _fileSystem = new FileSystem();
         _logger = NullLoggerFactory.Instance.CreateLogger<OcrReader>();
+
+        _session = new InferenceSession(GetAbsolutePath(_modelLocation), new SessionOptions {
+            LogSeverityLevel = OrtLoggingLevel.ORT_LOGGING_LEVEL_ERROR
+        });
     }
 
     public OcrReader(IFileSystem fileSystem, ILogger<OcrReader> logger) {
         _fileSystem = fileSystem;
         _logger = logger;
+
+        _session = new InferenceSession(GetAbsolutePath(_modelLocation), new SessionOptions {
+            LogSeverityLevel = OrtLoggingLevel.ORT_LOGGING_LEVEL_ERROR
+        });
     }
 
-    private const string _modelLocation = "OnnxModel/common_old.onnx";
-    private const string _charsetLocation = "OnnxModel/common_old.json";
+    public void Dispose() {
+        _session.Dispose();
+    }
 
     private string GetAbsolutePath(string relativePath) {
         var dataRoot = _fileSystem.FileInfo.New(typeof(OcrReader).Assembly.Location);
@@ -42,15 +56,11 @@ public class OcrReader {
     public async Task<string?> ReadTextAsync(string imagePath, CancellationToken cancellationToken) {
         var (imageData, width, height) = await PreprocessImageAsync(imagePath, cancellationToken);
 
-        using var session = new InferenceSession(GetAbsolutePath(_modelLocation), new SessionOptions {
-            LogSeverityLevel = OrtLoggingLevel.ORT_LOGGING_LEVEL_ERROR
-        });
-
         var inputTensor = new DenseTensor<float>(imageData, [1, 1, height, width]);
 
-        using var result = session.Run([
+        using var result = _session.Run([
             NamedOnnxValue.CreateFromTensor("input1", inputTensor)
-        ], session.OutputNames);
+        ], _session.OutputNames);
 
         var output = result.FirstOrDefault();
 
