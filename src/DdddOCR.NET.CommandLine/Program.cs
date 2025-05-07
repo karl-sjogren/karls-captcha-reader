@@ -1,11 +1,32 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.Diagnostics;
 using System.IO.Abstractions;
-
-var ocr = new DdddOCR.NET.Core.OcrReader();
+using DdddOCR.NET;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 var fileSystem = new FileSystem();
+using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole(options => {
+    options.FormatterName = ConsoleFormatterNames.Systemd;
+}));
+var ocr = new OcrReader(fileSystem, loggerFactory.CreateLogger<OcrReader>());
+
+var consoleLogger = loggerFactory.CreateLogger<Program>();
+
+var cts = new CancellationTokenSource();
+Console.CancelKeyPress += (s, e) => {
+    consoleLogger.LogInformation("Canceling...");
+    cts.Cancel();
+    e.Cancel = true;
+};
+
 var images = fileSystem.Directory.GetFiles("test-images", "*.jpg", SearchOption.AllDirectories);
 foreach(var image in images) {
-    var result = ocr.ReadText(image);
-    Console.WriteLine($"Image: {image} - Result: {result?.Substring(0, Math.Min(result.Length, 20))}...");
+    var stopwatch = Stopwatch.StartNew();
+    var result = await ocr.ReadTextAsync(image, cts.Token);
+    stopwatch.Stop();
+
+    var fileName = fileSystem.Path.GetFileName(image);
+    var isMatch = fileSystem.Path.GetFileNameWithoutExtension(image).Equals(result, StringComparison.OrdinalIgnoreCase);
+
+    consoleLogger.LogInformation("Image: {Image} - IsMatch: {IsMatch} - Result: {Result} - Time: {ElapsedMilliseconds} ms", image, isMatch, result, stopwatch.ElapsedMilliseconds);
 }

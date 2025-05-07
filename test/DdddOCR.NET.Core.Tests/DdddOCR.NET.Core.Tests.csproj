@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\DdddOCR.NET.Core\DdddOCR.NET.Core.csproj" />
-  </ItemGroup>
-
-</Project>

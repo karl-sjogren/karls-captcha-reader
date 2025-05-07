@@ -15,11 +15,9 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.4" />
     <PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="9.4.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.4" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.4" />
     <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="9.4.0" />
-    <PackageVersion Include="Microsoft.ML" Version="4.0.2" />
-    <PackageVersion Include="Microsoft.ML.ImageAnalytics" Version="4.0.2" />
     <PackageVersion Include="Microsoft.ML.OnnxRuntime" Version="1.21.0" />
-    <PackageVersion Include="Microsoft.ML.OnnxTransformer" Version="4.0.2" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageVersion Include="Shouldly" Version="4.3.0" />
     <PackageVersion Include="SixLabors.ImageSharp" Version="3.1.8" />
