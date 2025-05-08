@@ -1,7 +1,7 @@
 # Adapted version of https://github.com/hrvey/combine-prs-workflow
 # https://github.com/hrvey/combine-prs-workflow/blob/master/LICENSE
 name: 'Combine Dependabot Pull Requests'
-
+ 
 on:
   workflow_dispatch:
     inputs:
