@@ -8,7 +8,7 @@ var fileSystem = new FileSystem();
 using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole(options => {
     options.FormatterName = ConsoleFormatterNames.Systemd;
 }));
-var ocr = new OcrReader(fileSystem, loggerFactory.CreateLogger<OcrReader>());
+using var ocr = new OcrReader(fileSystem, loggerFactory.CreateLogger<OcrReader>());
 
 var consoleLogger = loggerFactory.CreateLogger<Program>();
 
