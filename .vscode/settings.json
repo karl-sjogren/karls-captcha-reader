@@ -8,5 +8,5 @@
     "**/.yarn/cache": true,
     ".vs/": true
   },
-  "dotnet.defaultSolution": "DdddOCR.NET.slnx",
+  "dotnet.defaultSolution": "Karls.CaptchaReader.slnx",
 }

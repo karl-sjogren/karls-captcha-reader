@@ -1,4 +1,4 @@
-namespace DdddOCR.NET.Tests;
+namespace Karls.CaptchaReader.Tests;
 
 public class UnitTest1 {
     [Fact]

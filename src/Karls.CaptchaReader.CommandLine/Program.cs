@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO.Abstractions;
-using DdddOCR.NET;
+using Karls.CaptchaReader;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 
@@ -8,7 +8,7 @@ var fileSystem = new FileSystem();
 using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole(options => {
     options.FormatterName = ConsoleFormatterNames.Systemd;
 }));
-using var ocr = new OcrReader(fileSystem, loggerFactory.CreateLogger<OcrReader>());
+using var ocr = new DdddOcrReader(fileSystem, loggerFactory.CreateLogger<DdddOcrReader>());
 
 var consoleLogger = loggerFactory.CreateLogger<Program>();
 

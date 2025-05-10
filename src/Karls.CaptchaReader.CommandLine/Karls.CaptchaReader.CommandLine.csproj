@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DdddOCR.NET\DdddOCR.NET.csproj" />
+    <ProjectReference Include="..\Karls.CaptchaReader\Karls.CaptchaReader.csproj" />
   </ItemGroup>
 
   <ItemGroup>

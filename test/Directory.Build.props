@@ -15,7 +15,7 @@
     <Using Include="Microsoft.Extensions.Time.Testing"/>
     <Using Include="Shouldly"/>
     <Using Include="Xunit"/>
-    <Using Include="DdddOCR.NET.TestHelpers.XUnitCancellationTokenHelper" Global="True" Static="True" />
+    <Using Include="Karls.CaptchaReader.TestHelpers.XUnitCancellationTokenHelper" Global="True" Static="True" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DdddOCR.NET.TestHelpers\DdddOCR.NET.TestHelpers.csproj" Condition=" '$(ProjectName)' != 'DdddOCR.NET.TestHelpers' " />
+    <ProjectReference Include="..\Karls.CaptchaReader.TestHelpers\Karls.CaptchaReader.TestHelpers.csproj" Condition=" '$(ProjectName)' != 'Karls.CaptchaReader.TestHelpers' " />
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -56,7 +56,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="coverlet.msbuild" Condition=" '$(ProjectName)' != 'DdddOCR.NET.TestHelpers' ">
+    <PackageReference Include="coverlet.msbuild" Condition=" '$(ProjectName)' != 'Karls.CaptchaReader.TestHelpers' ">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

@@ -5,7 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="OnnxModel/*">
+    <None Include="OnnxModel/common_old.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

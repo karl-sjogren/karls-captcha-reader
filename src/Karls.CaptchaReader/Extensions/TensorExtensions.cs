@@ -1,9 +1,9 @@
 using Microsoft.ML.OnnxRuntime.Tensors;
 
-namespace DdddOCR.NET.Extensions;
+namespace Karls.CaptchaReader.Extensions;
 
-public static class TensorExtensions {
-    public static int[] ArgMax(this Tensor<float> tensor) {
+internal static class TensorExtensions {
+    internal static int[] ArgMax(this Tensor<float> tensor) {
         var dimensions = tensor.Dimensions;
         var argMaxValues = new int[dimensions[0]];
         for(var i = 0; i < dimensions[0]; i++) {

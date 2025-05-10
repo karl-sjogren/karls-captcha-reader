@@ -2,7 +2,7 @@
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
 
-namespace DdddOCR.NET.Benchmarks;
+namespace Karls.CaptchaReader.Benchmarks;
 
 [Config(typeof(Config))]
 public class SampleBenchmark {

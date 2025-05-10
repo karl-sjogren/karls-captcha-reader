@@ -168,13 +168,35 @@ jobs:
     - name: Restore NuGet packages
       run: dotnet restore --verbosity minimal
 
-    - name: Publish application
-      run: dotnet publish --output ./artifacts --configuration Release
-      working-directory: ./
+    - name: Pack project
+      run: dotnet pack ./src/Karls.CaptchaReader/Karls.CaptchaReader.csproj --configuration Release --output artifacts
 
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
+    - name: Upload packages
+      uses: actions/upload-artifact@v3
       with:
-        name: publish-artifacts
+        name: packages
+        path: artifacts/*.nupkg
+
+  publish:
+    name: NuGet Publish
+    needs: net-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Download artiifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: packages
         path: ./artifacts/
-        if-no-files-found: error
+
+    - name: Install .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        global-json-file: global.json
+
+    - name: Publish package to NuGet.org
+      env:
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+      run: dotnet nuget push artifacts/*.nupkg --api-key $NUGET_KEY --source https://api.nuget.org/v3/index.json
+      working-directory: ./

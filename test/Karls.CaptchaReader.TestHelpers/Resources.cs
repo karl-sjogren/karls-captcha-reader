@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
-namespace DdddOCR.NET.TestHelpers;
+namespace Karls.CaptchaReader.TestHelpers;
 
 public static class Resources {
     private static readonly JsonSerializerOptions _serializerOptions = new(JsonSerializerDefaults.Web);
@@ -76,11 +76,11 @@ public static class Resources {
                 return false;
             }
 
-            if(!assemblyName.StartsWith("DdddOCR.NET.", StringComparison.Ordinal)) {
+            if(!assemblyName.StartsWith("Karls.CaptchaReader.", StringComparison.Ordinal)) {
                 return false;
             }
 
-            if(assemblyName == "DdddOCR.NET.TestHelpers") {
+            if(assemblyName == "Karls.CaptchaReader.TestHelpers") {
                 return false;
             }
 

@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/Karls.CaptchaReader.Benchmarks/Karls.CaptchaReader.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Karls.CaptchaReader.CommandLine/Karls.CaptchaReader.CommandLine.csproj" />
+    <Project Path="src/Karls.CaptchaReader/Karls.CaptchaReader.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/Karls.CaptchaReader.Tests/Karls.CaptchaReader.Tests.csproj" />
+    <Project Path="test/Karls.CaptchaReader.TestHelpers/Karls.CaptchaReader.TestHelpers.csproj" />
+  </Folder>
+</Solution>
