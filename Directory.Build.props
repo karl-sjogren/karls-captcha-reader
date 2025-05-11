@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <!-- Solution settings -->
-    <Version>0.7.0</Version>
+    <Version>0.8.0</Version>
     <LangVersion>latest</LangVersion>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

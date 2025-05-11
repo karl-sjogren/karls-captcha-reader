@@ -1,6 +1,5 @@
 using System.IO.Abstractions;
 using System.Text;
-using System.Text.Json;
 using Karls.CaptchaReader.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.ML.OnnxRuntime;
@@ -20,10 +19,8 @@ public sealed class DdddOcrReader : IOcrReader, IDisposable {
     private readonly ILogger<DdddOcrReader> _logger;
 
     private InferenceSession? _session;
-    private string[]? _charset;
 
     private const string _modelLocation = "./OnnxModel/common_old.onnx";
-    private const string _charsetLocation = "./OnnxModel/common_old.json";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DdddOcrReader"/> class.
@@ -117,30 +114,15 @@ public sealed class DdddOcrReader : IOcrReader, IDisposable {
 
         var argMaxValues = tensor.ArgMax();
 
-        return await MapToCharsetAsync(argMaxValues, cancellationToken);
+        return MapToCharset(argMaxValues);
     }
 
-    private async Task<string[]> LoadCharsetAsync(CancellationToken cancellationToken) {
-        if(_charset != null) {
-            return _charset;
-        }
-
-        var jsonData = await _fileSystem.File.ReadAllTextAsync(GetAbsolutePath(_charsetLocation), cancellationToken);
-
-        var charset = JsonSerializer.Deserialize<string[]>(jsonData)!;
-        if(charset == null) {
-            throw new InvalidOperationException("Failed to deserialize charset.");
-        }
-
-        return _charset = charset;
-    }
-
-    internal async Task<string> MapToCharsetAsync(int[] argMaxValues, CancellationToken cancellationToken) {
-        var charset = await LoadCharsetAsync(cancellationToken);
+    internal static string MapToCharset(int[] argMaxValues) {
+        var charset = DdddOcrCharset.Characters;
         var result = new StringBuilder();
 
         foreach(var value in argMaxValues) {
-            if(value <= 0 || value >= charset.Length) {
+            if(value <= 0 || value >= charset.Count) {
                 continue;
             }
 
