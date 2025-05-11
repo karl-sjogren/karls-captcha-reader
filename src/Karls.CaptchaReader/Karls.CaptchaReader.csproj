@@ -22,9 +22,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Karls.CaptchaReader.targets">
+      <Pack>True</Pack>
+      <PackagePath>build</PackagePath>
+    </None>
     <None Include="OnnxModel/common_old.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+
+      <Pack>true</Pack>
+      <PackagePath>content/OnnxModel</PackagePath>
     </None>
   </ItemGroup>
 </Project>
