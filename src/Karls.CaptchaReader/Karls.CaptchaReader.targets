@@ -1,6 +1,6 @@
 <Project>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)..\content\OnnxModel\*.onnx">
+    <None Include="$(MSBuildThisFileDirectory)..\content\OnnxModel\*">
       <Link>OnnxModel\%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Visible>false</Visible>
