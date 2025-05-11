@@ -15,7 +15,7 @@ namespace Karls.CaptchaReader;
 /// <summary>
 /// <inheritdoc />
 /// </summary>
-public sealed class DdddOcrReader : IDisposable {
+public sealed class DdddOcrReader : IOcrReader, IDisposable {
     private readonly IFileSystem _fileSystem;
     private readonly ILogger<DdddOcrReader> _logger;
 
