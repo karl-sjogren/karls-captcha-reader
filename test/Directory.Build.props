@@ -10,11 +10,11 @@
   </ImportGroup>
 
   <ItemGroup>
-    <Using Include="FakeItEasy"/>
-    <Using Include="Microsoft.Extensions.Logging.Abstractions"/>
-    <Using Include="Microsoft.Extensions.Time.Testing"/>
-    <Using Include="Shouldly"/>
-    <Using Include="Xunit"/>
+    <Using Include="FakeItEasy" />
+    <Using Include="Microsoft.Extensions.Logging.Abstractions" />
+    <Using Include="Microsoft.Extensions.Time.Testing" />
+    <Using Include="Shouldly" />
+    <Using Include="Xunit" />
     <Using Include="Karls.CaptchaReader.TestHelpers.XUnitCancellationTokenHelper" Global="True" Static="True" />
   </ItemGroup>
 
